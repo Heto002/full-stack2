@@ -1,9 +1,41 @@
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.columnHeader{
+  border-top: 1px solid #D5D7DD;
+}
+
+.columnHeaderSearch{
+  background-color: #D5D7DD;
+}
+
+.oddRows{
+  background-color: #F6F6F8;
+}
+
 .App {
   height:100vh;
-  display:grid;
-  justify-content: center;
-  align-content: center;
   text-align: center;
+}
+
+.newRecord{
+  background-color: #0c738f;
+  display: inline-block;
+  width: 100%;
+}
+
+.exisitingRecords{
+  border: 1px solid;
+  display: inline-block;
+  width: 100%;
+}
+
+.column{
+  float: left;
+  width: 50%;
+  align-items: center;
 }
 
 .App-logo {

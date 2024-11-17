@@ -4,7 +4,11 @@ sql = require('mssql');
 const getUsers = async(firstname) => {
     try{
         let pool = await sql.connect(config);
-        let users = await pool.request().query(`SELECT * FROM Users WHERE Firstname = '${firstname}'`)
+        //FirstName = X
+        //let users = await pool.request().query(`SELECT * FROM Users WHERE Firstname = '${firstname}'`)
+
+        //Firstname STARTS WITH X
+        let users = await pool.request().query(`SELECT * FROM Users WHERE Firstname LIKE '${firstname}%'`)
         console.log(users);
         return users;
     }

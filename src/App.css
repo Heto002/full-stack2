@@ -21,6 +21,7 @@ padding-left: 0;
 
 .navbar li:hover{
   background-color: #156172;
+  height: 100%;
 }
 
 .navbar a{
@@ -30,6 +31,7 @@ padding-left: 0;
 
 .navbar a:hover{
   color: white;
+  font-size: x-large;
 }
 
 .columnHeader{
@@ -42,6 +44,14 @@ padding-left: 0;
 
 .oddRows{
   background-color: #F6F6F8;
+}
+
+.oddRows:hover{
+  font-size: x-large;
+}
+
+.evenRows:hover{
+  font-size: x-large;
 }
 
 .App {
@@ -78,6 +88,10 @@ padding-left: 0;
 table{
   width: 100%;
   border-collapse: collapse;
+}
+
+label{
+  display: block;
 }
 
 .App-logo {

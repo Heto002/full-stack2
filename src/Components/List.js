@@ -3,12 +3,12 @@ import React, {useState} from 'react';
 
 export function List(){
     const [returnedData, setReturnedData] = useState(["Hello"]);
-    const [user,setUser] = useState({UserID:0,Firstname:"",Lastname:"",Age:0,Gender:""});
+    const [user,setUser] = useState({user_id:0,first_name:"",last_name:"",age:0,gender:""});
   
     const setInput = (e) =>{
       const {name,value} = e.target;
       console.log(value);
-      if(name === "UserID" || name === "Age"){
+      if(name === "user_id" || name === "age"){
         setUser(prevState => ({
           ...prevState,
           [name]: parseInt(value)
@@ -32,7 +32,7 @@ export function List(){
           'Accept':'application/json'
         },
         body: JSON.stringify({
-          name:user.Firstname
+          name:user.first_name
         })
       })
       .then(res => res.json());
@@ -74,37 +74,37 @@ export function List(){
           <tbody>
             <tr class="columnHeaderSearch">
                 <td>
-                  <input type="number" id="UserID" name="UserID" placeholder="Search" onChange={setInput}></input>
+                  <input type="number" id="user_id" name="user_id" placeholder="Search" onChange={setInput}></input>
                 </td>
 
                 <td>
-                  <input type="text" id="Firstname" name="Firstname" placeholder="Search" onChange={setInput}></input>
+                  <input type="text" id="first_name" name="first_name" placeholder="Search" onChange={setInput}></input>
                 </td>
                 
                 <td>
-                  <input type="text" id="Lastname" name="Lastname" placeholder="Search" onChange={setInput}></input>
+                  <input type="text" id="last_name" name="last_name" placeholder="Search" onChange={setInput}></input>
                 </td>
 
                 <td>
-                  <input id="Age" type="number" name="Age" placeholder="Search" onChange={setInput}></input>
+                  <input id="Age" type="number" name="age" placeholder="Search" onChange={setInput}></input>
                 </td>
 
                 <td>
-                  <input type="text" id="Gender" name="Gender" placeholder="Search" onChange={setInput}></input>
+                  <input type="text" id="gender" name="gender" placeholder="Search" onChange={setInput}></input>
                 </td>
               </tr>
             {
               returnedData.map((user,index) =>{
                 return(
                   (()=>{
-                    if(index %2 ==0){
+                    if(index %2 === 0){
                         return(                    
                         <tr class="evenRows">
-                          <td>{user.UserID}</td>
-                          <td>{user.Firstname}</td>
-                          <td>{user.Lastname}</td>
-                          <td>{user.Age}</td>
-                          <td>{user.Gender}</td>
+                          <td>{user.user_id}</td>
+                          <td>{user.first_name}</td>
+                          <td>{user.last_name}</td>
+                          <td>{user.age}</td>
+                          <td>{user.gender}</td>
                         </tr>
                         )
                     }
@@ -112,11 +112,11 @@ export function List(){
                     else{
                       return(                    
                         <tr class="oddRows">
-                          <td>{user.UserID}</td>
-                          <td>{user.Firstname}</td>
-                          <td>{user.Lastname}</td>
-                          <td>{user.Age}</td>
-                          <td>{user.Gender}</td>
+                       <td>{user.user_id}</td>
+                          <td>{user.first_name}</td>
+                          <td>{user.last_name}</td>
+                          <td>{user.age}</td>
+                          <td>{user.gender}</td>
                         </tr>
                       )
                     }

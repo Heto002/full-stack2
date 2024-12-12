@@ -10,7 +10,7 @@ export function Navbar(){
                 </li>
 
                 <li>
-                    <Link to="/userCreate">Create User</Link>
+                    <Link to="/recordCreate/User">Create User</Link>
                 </li>
 
                 <li>

@@ -31,7 +31,7 @@ app.post('/api',async(req,res) => {
 
 app.post('/hello',async(req,res) => {
     await dboperation.createUser(req.body);
-    const result = await dboperation.getUsers(req.body.Firstname);
+    const result = await dboperation.getUsers(req.body.first_name);
     res.send(result.recordset);
 });
 

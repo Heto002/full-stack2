@@ -13,7 +13,6 @@ import { RecordList } from './Pages/recordList';
 import { Layout } from './Layout';
 
 function App() {
-
  return(
   <Router>
     <Routes>

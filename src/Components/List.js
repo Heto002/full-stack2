@@ -27,7 +27,7 @@ export function List({table}){
     }
   
     const getData = async() =>{
-      console.log(record);
+      console.log("record: " + JSON.stringify(record));
       const newData = await fetch('/api',{
         method:"POST",
         headers:{
@@ -56,7 +56,6 @@ export function List({table}){
             metaData.fields.map((field,index) =>{
               return(
                 (()=>{
-                  if(metaData.fields[index].column_type === "A"){
                     return(
                       <>
                         <th>
@@ -64,7 +63,6 @@ export function List({table}){
                         </th>
                       </>                   
                     )
-                  }
                 })()
               )
             })
@@ -74,50 +72,62 @@ export function List({table}){
 
           <tbody>
             <tr class="columnHeaderSearch">
-                <td>
-                  <input type="number" id="user_id" name="user_id" placeholder="Search" onChange={setInput}></input>
-                </td>
-
-                <td>
-                  <input type="text" id="first_name" name="first_name" placeholder="Search" onChange={setInput}></input>
-                </td>
-                
-                <td>
-                  <input type="text" id="last_name" name="last_name" placeholder="Search" onChange={setInput}></input>
-                </td>
-
-                <td>
-                  <input id="Age" type="number" name="age" placeholder="Search" onChange={setInput}></input>
-                </td>
-
-                <td>
-                  <input type="text" id="gender" name="gender" placeholder="Search" onChange={setInput}></input>
-                </td>
-              </tr>
+            {
+            metaData.fields.map((field,index) =>{
+              return(
+                (()=>{
+                    return(
+                      <>
+                        <td>
+                          <input type={metaData.fields[index].field_type} id={metaData.fields[index].field_name} name={metaData.fields[index].field_name} placeholder="Search" onChange={setInput}></input>
+                        </td>
+                      </>                   
+                    )
+                })()
+              )
+            })
+          }
+          </tr>
             {
               returnedData.map((user,index) =>{
                 return(
                   (()=>{
                     if(index %2 === 0){
                         return(                    
-                        <tr class="evenRows">
-                          <td>{user.user_id}</td>
-                          <td>{user.first_name}</td>
-                          <td>{user.last_name}</td>
-                          <td>{user.age}</td>
-                          <td>{user.gender}</td>
-                        </tr>
+                          <tr class="evenRows">
+                            {
+                              metaData.fields.map((field,index2) =>{
+                                return(
+                                  (()=>{
+                                      return(
+                                        <>
+                                          <td>{user[metaData.fields[index2].field_name]}</td>
+                                        </>                   
+                                      )
+                                  })()
+                                )
+                              })
+                            }
+                          </tr>
                         )
                     }
 
                     else{
                       return(                    
                         <tr class="oddRows">
-                       <td>{user.user_id}</td>
-                          <td>{user.first_name}</td>
-                          <td>{user.last_name}</td>
-                          <td>{user.age}</td>
-                          <td>{user.gender}</td>
+                          {
+                            metaData.fields.map((field,index2) =>{
+                              return(
+                                (()=>{
+                                    return(
+                                      <>
+                                        <td>{user[metaData.fields[index2].field_name]}</td>
+                                      </>                   
+                                    )
+                                })()
+                              )
+                            })
+                          }
                         </tr>
                       )
                     }

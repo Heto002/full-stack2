@@ -1,7 +1,10 @@
 /*Import Link to allow access to other pages*/
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export function Navbar(){
+    console.log("useLocation: " + useLocation().pathname);
+
     return(
         <div class="navbar">
             <ul>

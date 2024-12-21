@@ -18,8 +18,8 @@ function App() {
     <Routes>
       <Route element={<Layout/>}>
         <Route path="/" element={<Home/>}/>
-        <Route path={"/recordCreate/" + "User"} element={<RecordCreate/>}/>
-        <Route path={"/recordList/" + "User"}element={<RecordList/>}/>
+        <Route path={"/recordCreate/:table"} element={<RecordCreate/>}/>
+        <Route path={"/recordList/:table"}element={<RecordList/>}/>
       </Route>
     </Routes>
   </Router>

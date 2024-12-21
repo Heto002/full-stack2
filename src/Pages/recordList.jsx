@@ -1,14 +1,13 @@
 import { List } from '../Components/List';
+import { useParams } from 'react-router-dom';
 
 export function RecordList(){
-    function getTableFromURL(url){
-        return (url.substring(url.lastIndexOf("/")+1, url.length));
-      }
+    const {table} = useParams(); //Get Dynamic route parameter
 
     return(
         <>
             <div className="App">
-                <List table={getTableFromURL(window.location.href)}/>
+                <List table={table}/>
             </div>
         </>
     )

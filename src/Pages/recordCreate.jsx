@@ -1,15 +1,14 @@
 /*Import Components*/
 import { Record } from '../Components/Record';
+import { useParams } from 'react-router-dom';
 
 export function RecordCreate(){
-    function getTableFromURL(url){
-        return (url.substring(url.lastIndexOf("/")+1, url.length));
-      }
+    const {table} = useParams(); //Get Dynamic route parameter
 
     return(
         <>
             <div className="App">
-                <Record table={getTableFromURL(window.location.href)}/>
+                <Record table={table}/>
             </div>
         </>
     )

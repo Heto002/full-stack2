@@ -7,7 +7,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 /*Import Pages*/
 import { Home } from './Pages/home';
 import { RecordCreate } from './Pages/recordCreate';
-import { UserList } from './Pages/userList';
+import { RecordList } from './Pages/recordList';
 
 /*Import the Layout.jsx file*/
 import { Layout } from './Layout';
@@ -20,7 +20,7 @@ function App() {
       <Route element={<Layout/>}>
         <Route path="/" element={<Home/>}/>
         <Route path={"/recordCreate/" + "User"} element={<RecordCreate/>}/>
-        <Route path="/userList" element={<UserList/>}/>
+        <Route path={"/recordList/" + "User"}element={<RecordList/>}/>
       </Route>
     </Routes>
   </Router>

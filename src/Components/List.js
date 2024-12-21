@@ -1,15 +1,18 @@
 /*Import State, from React*/
 import React, {useState} from 'react';
 
-export function List(){
+export function List({table}){
+
+  const metaData = require('../Tables/' + table + '.json');
+
     const [returnedData, setReturnedData] = useState(["Hello"]);
-    const [user,setUser] = useState({user_id:0,first_name:"",last_name:"",age:0,gender:""});
+    const [record,setRecord] = useState({user_id:0,first_name:"",last_name:"",age:0,gender:""});
   
     const setInput = (e) =>{
       const {name,value} = e.target;
       console.log(value);
       if(name === "user_id" || name === "age"){
-        setUser(prevState => ({
+        setRecord(prevState => ({
           ...prevState,
           [name]: parseInt(value)
         }));
@@ -17,14 +20,14 @@ export function List(){
         //Early return
         return;
       }
-      setUser(prevState => ({
+      setRecord(prevState => ({
         ...prevState,
         [name]: value
       }));
     }
   
     const getData = async() =>{
-      console.log(user);
+      console.log(record);
       const newData = await fetch('/api',{
         method:"POST",
         headers:{
@@ -32,7 +35,7 @@ export function List(){
           'Accept':'application/json'
         },
         body: JSON.stringify({
-          name:user.first_name
+          name:record.first_name
         })
       })
       .then(res => res.json());
@@ -49,25 +52,23 @@ export function List(){
         <table>
           <thead>
             <tr class="columnHeader">
-              <th>
-                <span>UserID</span>
-              </th>
-
-              <th>
-                <span>Firstname</span>
-              </th>
-
-              <th>
-                <span>Lastname</span>
-              </th>
-
-              <th>
-                <span>Age</span>
-              </th>
-
-              <th>
-                <span>Gender</span>
-              </th>
+            {
+            metaData.fields.map((field,index) =>{
+              return(
+                (()=>{
+                  if(metaData.fields[index].column_type === "A"){
+                    return(
+                      <>
+                        <th>
+                          <span>{metaData.fields[index].field_label}</span>
+                        </th>
+                      </>                   
+                    )
+                  }
+                })()
+              )
+            })
+          }
             </tr>
           </thead>
 

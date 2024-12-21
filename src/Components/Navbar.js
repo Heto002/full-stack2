@@ -14,7 +14,7 @@ export function Navbar(){
                 </li>
 
                 <li>
-                    <Link to="/userList">Users</Link>
+                    <Link to="/recordList/User">Users</Link>
                 </li>
             </ul>
         </div>

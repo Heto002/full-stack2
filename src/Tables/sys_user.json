@@ -7,35 +7,45 @@
             "field_name":"user_id",
             "field_type":"number",
             "column_type":"A",
-            "column_size":50
+            "column_size":50,
+            "default_value":0,
+            "display":false
         },
         {
             "field_label":"First Name",
             "field_name":"first_name",
             "field_type":"string",
             "column_type":"A",
-            "column_size":50
+            "column_size":50,
+            "default_value":"",
+            "display":true
         },
         {
             "field_label":"Last Name",
             "field_name":"last_name",
             "field_type":"string",
             "column_type":"A",
-            "column_size":50
+            "column_size":50,
+            "default_value":"",
+            "display":false
         },
         {
             "field_label":"Age",
             "field_name":"age",
             "field_type":"number",
             "column_type":"B",
-            "column_size":50
+            "column_size":50,
+            "default_value":0,
+            "display":false
         },
         {
             "field_label":"Gender",
             "field_name":"gender",
             "field_type":"string",
             "column_type":"B",
-            "column_size":50
+            "column_size":50,
+            "default_value":"",
+            "display":false
         }
     ]
 }

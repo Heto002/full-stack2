@@ -6,11 +6,23 @@ export function List({table}){
   const metaData = require('../Tables/' + table + '.json');
 
     const [returnedData, setReturnedData] = useState(["Hello"]);
-    const [record,setRecord] = useState({user_id:0,first_name:"",last_name:"",age:0,gender:""});
+    const defaultValues = {};
+    var displayField = "";
+    var numberFields = [];
+
+    metaData.fields.map((field,index) =>{
+      defaultValues[metaData.fields[index].field_name] = metaData.fields[index].default_value;
+      if(metaData.fields[index].display == true)
+        displayField = metaData.fields[index].field_name;
+
+      if(metaData.fields[index].field_type == "number")
+        numberFields.push(metaData.fields[index].field_name);
+    });
+    const [record,setRecord] = useState(defaultValues);
   
     const setInput = (e) =>{
       const {name,value} = e.target;
-      if(name === "user_id" || name === "age"){
+      if(numberFields.some(value => value === name)){
         setRecord(prevState => ({
           ...prevState,
           [name]: parseInt(value)
@@ -33,9 +45,9 @@ export function List({table}){
           'Accept':'application/json'
         },
         body: JSON.stringify({
-          field_name:"first_name",
-          field_value:record.first_name,
-          table:table
+          table:table,
+          field_name:displayField,
+          field_value:record[displayField]
         })
       })
       .then(res => res.json());

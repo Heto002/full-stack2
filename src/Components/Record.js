@@ -3,13 +3,22 @@ import React, {useState} from 'react';
 export function Record({table}){
 
   const metaData = require('../Tables/' + table + '.json');
-  const [record,setRecord] = useState({user_id:0,first_name:"",last_name:"",age:0,gender:""});
+  const defaultValues = {};
+  var numberFields = [];
+
+  metaData.fields.map((field,index) =>{
+    defaultValues[metaData.fields[index].field_name] = metaData.fields[index].default_value;
+
+    if(metaData.fields[index].field_type == "number")
+      numberFields.push(metaData.fields[index].field_name);
+  });
+  const [record,setRecord] = useState(defaultValues);
 
   const setInput = (e) =>{
     const {name,value} = e.target;
     console.log("Real-time field value changes: " + value);
       
-    if(name === "user_id" || name === "age"){
+    if(numberFields.some(value => value === name)){
       setRecord(prevState => ({
         ...prevState,
         [name]: parseInt(value)

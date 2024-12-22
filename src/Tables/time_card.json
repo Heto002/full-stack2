@@ -5,51 +5,65 @@
         {
             "field_label":"Monday",
             "field_name":"monday",
-            "field_type":"string",
+            "field_type":"number",
             "column_type":"A",
-            "column_size":50
+            "column_size":50,
+            "default_value":0,
+            "display":false
         },
         {
             "field_label":"Tuesday",
             "field_name":"tuesday",
-            "field_type":"string",
+            "field_type":"number",
             "column_type":"A",
-            "column_size":50
+            "column_size":50,
+            "default_value":0,
+            "display":false
         },
         {
             "field_label":"Wednesday",
             "field_name":"wednesday",
-            "field_type":"string",
+            "field_type":"number",
             "column_type":"A",
-            "column_size":50
+            "column_size":50,
+            "default_value":0,
+            "display":false
         },
         {
             "field_label":"Thursday",
             "field_name":"thursday",
-            "field_type":"string",
+            "field_type":"number",
             "column_type":"A",
-            "column_size":50
+            "column_size":50,
+            "default_value":0,
+            "display":false
         },
         {
             "field_label":"Friday",
             "field_name":"friday",
-            "field_type":"string",
+            "field_type":"number",
             "column_type":"B",
-            "column_size":50
+            "column_size":50,
+            "default_value":0,
+            "display":false
         },
         {
             "field_label":"Saturday",
             "field_name":"saturday",
-            "field_type":"string",
+            "field_type":"number",
             "column_type":"B",
-            "column_size":50
+            "column_size":50,
+            "default_value":0,
+            "display":false
         },
         {
             "field_label":"Sunday",
             "field_name":"sunday",
-            "field_type":"string",
+            "field_type":"number",
             "column_type":"B",
-            "column_size":50
+            "column_size":50,
+            "default_value":0,
+            "display":false
         }
     ]
 }

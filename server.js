@@ -25,14 +25,30 @@ app.use(cors());
 
 
 app.post('/api',async(req,res) => {
-    const result = await dboperation.getUsers(req.body.name);
+    const result = await dboperation.getSQLRecords(req.body.table, req.body.field_name,req.body.field_value);
     res.send(result.recordset);
 });
 
 app.post('/hello',async(req,res) => {
-    await dboperation.createUser(req.body);
-    const result = await dboperation.getUsers(req.body.first_name);
-    res.send(result.recordset);
+    var obj = {};
+
+    for(key in req.body){
+        if(key != "table"){
+            obj[key] = {
+                "field_name":key,
+                "field_value":req.body[key],
+                "field_type":typeof(req.body[key]),
+            }
+        }
+    }
+
+    const result = await dboperation.createSQLRecord(req.body.table, obj);
+    //Output: {"recordsets":[],"output":{},"rowsAffected":[1]}
+    if(result == 1)
+        res.send({response:"Successful"});
+
+    else
+        res.send({response:"Unsuccessful"});
 });
 
 app.listen(API_PORT,() => console.log(`Listening on port ${API_PORT}`));

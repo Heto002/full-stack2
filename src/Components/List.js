@@ -10,7 +10,6 @@ export function List({table}){
   
     const setInput = (e) =>{
       const {name,value} = e.target;
-      console.log(value);
       if(name === "user_id" || name === "age"){
         setRecord(prevState => ({
           ...prevState,
@@ -27,7 +26,6 @@ export function List({table}){
     }
   
     const getData = async() =>{
-      console.log("record: " + JSON.stringify(record));
       const newData = await fetch('/api',{
         method:"POST",
         headers:{
@@ -35,11 +33,12 @@ export function List({table}){
           'Accept':'application/json'
         },
         body: JSON.stringify({
-          name:record.first_name
+          field_name:"first_name",
+          field_value:record.first_name,
+          table:table
         })
       })
       .then(res => res.json());
-      console.log("newData: " + JSON.stringify(newData));
       setReturnedData(newData);
     }
 
@@ -89,7 +88,7 @@ export function List({table}){
           }
           </tr>
             {
-              returnedData.map((user,index) =>{
+              returnedData.map((record,index) =>{
                 return(
                   (()=>{
                     if(index %2 === 0){
@@ -101,7 +100,7 @@ export function List({table}){
                                   (()=>{
                                       return(
                                         <>
-                                          <td>{user[metaData.fields[index2].field_name]}</td>
+                                          <td>{record[metaData.fields[index2].field_name]}</td>
                                         </>                   
                                       )
                                   })()
@@ -121,7 +120,7 @@ export function List({table}){
                                 (()=>{
                                     return(
                                       <>
-                                        <td>{user[metaData.fields[index2].field_name]}</td>
+                                        <td>{record[metaData.fields[index2].field_name]}</td>
                                       </>                   
                                     )
                                 })()

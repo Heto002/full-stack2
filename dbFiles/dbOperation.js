@@ -1,16 +1,11 @@
 const config = require('./dbConfig'),
 sql = require('mssql');
 
-const getUsers = async(firstname) => {
+const getSQLRecords = async(table,fieldName,fieldValue) => {
     try{
         let pool = await sql.connect(config);
-        //FirstName = X
-        //let users = await pool.request().query(`SELECT * FROM Users WHERE Firstname = '${firstname}'`)
-        console.log("firstname: " + firstname);
-        //Firstname STARTS WITH X
-        let users = await pool.request().query(`SELECT * FROM Users WHERE first_name LIKE '${firstname}%'`)
-        console.log(users);
-        return users;
+        let records = await pool.request().query(`SELECT * FROM ${table} WHERE ${fieldName} LIKE '${fieldValue}%'`)
+        return records;
     }
 
     catch(error){
@@ -18,15 +13,28 @@ const getUsers = async(firstname) => {
     }
 }
 
-const createUser = async(User) => {
+const createSQLRecord = async(table,fieldsObj) => {
     try{
         let pool = await sql.connect(config);
-        let users = await pool.request().query(`INSERT INTO Users VALUES
-            (${User.user_id},'${User.first_name}','${User.last_name}',${User.age},'${User.gender}')
-            `)
-        console.log(users);
+        var fieldValuesArr= [];
+        var fieldNamesArr = [];
 
-        return users;
+        for(key in fieldsObj){
+
+            if(fieldsObj[key]['field_type'] == "string"){
+                fieldValuesArr.push("'" + fieldsObj[key]['field_value'] + "'");
+            }
+            else
+                fieldValuesArr.push(fieldsObj[key]['field_value']);
+
+            fieldNamesArr.push(fieldsObj[key]['field_name'])
+        }
+
+
+        let record = await pool.request().query(`INSERT INTO ${table} (${fieldNamesArr.toString()}) VALUES(` + fieldValuesArr.toString() + `)`);
+        
+        //Sample Output: {"recordsets":[],"output":{},"rowsAffected":[1]}
+        return record.rowsAffected;
     }
 
     catch(error){
@@ -35,6 +43,6 @@ const createUser = async(User) => {
 }
 
 module.exports = {
-    createUser,
-    getUsers
+    createSQLRecord,
+    getSQLRecords
 }

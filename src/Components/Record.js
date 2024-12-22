@@ -3,11 +3,6 @@ import React, {useState} from 'react';
 export function Record({table}){
 
   const metaData = require('../Tables/' + table + '.json');
-
-  //returnedData is the variable that will hold a value
-  //setReturendData is the function that will set the value for the returnedData variable
-  //["Hello"] is the initialized value or default value
-  const [returnedData, setReturnedData] = useState(["Hello"]);
   const [record,setRecord] = useState({user_id:0,first_name:"",last_name:"",age:0,gender:""});
 
   const setInput = (e) =>{
@@ -29,23 +24,6 @@ export function Record({table}){
       [name]: value
     }));
   }
-  
-  const getData = async() =>{
-    console.log("record: " + record);
-    const newData = await fetch('/api',{
-      method:"POST",
-      headers:{
-        'Content-Type':'application/json',
-        'Accept':'application/json'
-      },
-      body: JSON.stringify({
-        name:record.first_name
-      })
-    })
-    .then(res => res.json());
-    console.log("JSON.stringify(newData): " + JSON.stringify(newData));
-    setReturnedData(newData);
-  }
     
   const createRecord = async() =>{
     const newData = await fetch('/hello',{
@@ -55,15 +33,19 @@ export function Record({table}){
         'Accept':'application/json'
       },
       body: JSON.stringify({
+        table:table,
         ...record
       })
     })
-    .then(res => res.json());
+    .then((res) => {
+      return res.json(); // Parse and return the JSON response
+    });
+
+    alert("The record creation was " + newData.response);
   }
 
   return(
     <div class="newRecord">
-
       <h1>Create a New Record</h1>
       <button onClick={() => createRecord()}>Create</button>
 
